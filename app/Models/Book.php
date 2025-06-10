@@ -4,9 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 
 class Book extends Model
 {
+
+    use HasFactory;
+
     // Specify which attributes can be mass-assigned
     protected $fillable = [
         'title',
@@ -16,7 +21,7 @@ class Book extends Model
         'publisher',
         'publicationDate',
         'category',
-        'IBSN',
+        'ISBN',
         'pageCount',
         'avgRating',
     ];

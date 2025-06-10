@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('category')->nullable();
             $table->string('isbn')->unique();
             $table->integer('pageCount')->nullable();
-            $table->float('avg_rating')->default(0);
+            $table->float('avgRating')->default(0);
             $table->timestamps();
         });
     }

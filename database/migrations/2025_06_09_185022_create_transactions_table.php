@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');  // Foreign key to users table
             $table->foreignId('book_id')->constrained('books')->onDelete('cascade');  // Foreign key to books table
-            $table->enum('action_type', ['checkout', 'return', 'reserve']);
+            $table->enum('actionType', ['checkout', 'return', 'reserve']);
             $table->timestamp('timestamp')->useCurrent();
         });
     }
