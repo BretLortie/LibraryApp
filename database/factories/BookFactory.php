@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Book>
  */
@@ -27,7 +26,7 @@ class BookFactory extends Factory
             'publisher' => $this->faker->company(),
             'publicationDate' => $this->faker->date(),
             'category' => $this->faker->randomElement(['Fiction', 'Non-fiction', 'Sci-Fi', 'Fantasy', 'Biography']),
-            'IBSN' => $this->faker->unique()->isbn13(),
+            'ISBN' => $this->faker->unique()->isbn13(),
             'pageCount' => $this->faker->numberBetween(100, 1000),
             'avgRating' => $this->faker->randomFloat(1, 1, 5),
         ];
