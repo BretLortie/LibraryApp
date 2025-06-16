@@ -19,6 +19,12 @@ const mainNavItems: NavItem[] = [
         href: '/books',
         icon: BookOpen,
     },
+    {
+        title: 'Featured Books',
+        href: '/featured-books',
+        icon: BookOpen,
+    },
+
 ];
 
 
@@ -43,7 +49,7 @@ const footerNavItems: NavItem[] = [
                 <SidebarMenuItem>
                     <SidebarMenuButton size="lg" as-child>
                         <Link :href="route('dashboard')">
-                            <AppLogo />
+                        <AppLogo />
                         </Link>
                     </SidebarMenuButton>
                 </SidebarMenuItem>
