@@ -2,21 +2,54 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Book;
+use Illuminate\Http\Request;
 use App\Models\Library;
-use Inertia\Inertia;
 
 class FeaturedBooksController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $books = Library::with('book:id,title,author,description,coverImage,avgRating') //Pulls 10 random books from the library
-            ->inRandomOrder()
-            ->take(20)
-            ->get();
+        $query = Library::with('book');
 
-        return Inertia::render('Books/Featured', [
-            'books' => $books,
+        // Filter by availability (0 or 1)
+        if ($request->has('availability')) {
+            $query->where('availability', $request->input('availability'));
+        }
+
+        // Join with books table for sorting purposes
+        $query->join('books', 'library.book_id', '=', 'books.id')
+            ->select('library.*'); // select only library table columns
+
+        // Apply sorting
+        if ($request->filled('sort_by')) {
+            $direction = $request->input('direction', 'asc');
+            $column = match ($request->input('sort_by')) {
+                'title', 'author' => 'books.' . $request->input('sort_by'),
+                default => null,
+            };
+
+            if ($column) {
+                $query->orderBy($column, $direction);
+            }
+        } else {
+            $query->inRandomOrder(); // fallback to random order
+        }
+
+        $books = $query->get();
+
+        return inertia('Books/Featured', [
+            'books' => $books->map(function ($entry) {
+                return [
+                    'availability' => $entry->availability,
+                    'book' => [
+                        'title' => $entry->book->title,
+                        'author' => $entry->book->author,
+                        'description' => $entry->book->description,
+                        'coverImage' => $entry->book->coverImage,
+                        'avgRating' => $entry->book->avgRating,
+                    ],
+                ];
+            }),
         ]);
     }
 }
