@@ -24,7 +24,7 @@ class FeaturedBooksController extends Controller
         if ($request->filled('sort_by')) {
             $direction = $request->input('direction', 'asc');
             $column = match ($request->input('sort_by')) {
-                'title', 'author' => 'books.' . $request->input('sort_by'),
+                'title', 'author', 'avgRating' => 'books.' . $request->input('sort_by'),
                 default => null,
             };
 

@@ -45,6 +45,7 @@ const applyFilters = () => {
                         <option value="">Random</option>
                         <option value="title">Title</option>
                         <option value="author">Author</option>
+                        <option value="avgRating">Rating</option>
                     </select>
                 </div>
 
