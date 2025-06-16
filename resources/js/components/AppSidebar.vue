@@ -29,6 +29,11 @@ const mainNavItems: NavItem[] = [
         href: '/books/create',
         icon: PlusCircle,
     },
+    {
+        title: 'Edit Books', // temporary link
+        href: '/books/edit',     // change 1 to any valid book ID in your DB
+        icon: BookOpen,
+    },
 
 ];
 

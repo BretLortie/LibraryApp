@@ -22,7 +22,7 @@ class BookController extends Controller
                     'publisher' => $book->publisher,
                     'publicationDate' => $book->publicationDate,
                     'category' => $book->category,
-                    'ISBN' => $book->isbn,
+                    'ISBN' => $book->ISBN,
                     'pageCount' => $book->pageCount,
                     'reviews' => $book->reviews->map(function ($review) {
                         return [
@@ -52,7 +52,7 @@ class BookController extends Controller
             'publisher' => 'nullable|string|max:255',
             'publicationDate' => 'nullable|date',
             'category' => 'nullable|string|max:255',
-            'isbn' => 'nullable|string|max:50',
+            'ISBN' => 'nullable|string|max:50',
             'pageCount' => 'nullable|integer|min:1',
         ]);
 
@@ -60,5 +60,31 @@ class BookController extends Controller
 
         return redirect()->route('books.index')
             ->with('success', 'Book added successfully.');
+    }
+
+    public function update(Request $request, Book $book)
+    {
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'author' => 'required|string|max:255',
+            'publisher' => 'nullable|string|max:255',
+            'publicationDate' => 'nullable|date',
+            'category' => 'nullable|string|max:255',
+            'ISBN' => 'nullable|string|max:20',
+            'pageCount' => 'nullable|integer',
+        ]);
+
+        $book->update($validated);
+
+        return redirect()->route('books.index')->with('success', 'Book updated successfully.');
+    }
+
+    public function editPage()
+    {
+        $books = Book::all();
+
+        return Inertia::render('Books/Edit', [
+            'books' => $books,
+        ]);
     }
 }

@@ -9,7 +9,7 @@ const form = useForm({
   publisher: '',
   publicationDate: '',
   category: '',
-  isbn: '',
+  ISBN: '',
   pageCount: '',
 });
 
@@ -95,15 +95,15 @@ function submit() {
         </div>
 
         <div>
-          <label class="block font-semibold mb-1" for="isbn">ISBN</label>
+          <label class="block font-semibold mb-1" for="ISBN">ISBN</label>
           <input
-            v-model="form.isbn"
-            id="isbn"
+            v-model="form.ISBN"
+            id="ISBN"
             type="text"
             class="w-full border rounded px-3 py-2"
-            :class="{ 'border-red-500': form.errors.isbn }"
+            :class="{ 'border-red-500': form.errors.ISBN }"
           />
-          <p v-if="form.errors.isbn" class="text-red-600 text-sm mt-1">{{ form.errors.isbn }}</p>
+          <p v-if="form.errors.ISBN" class="text-red-600 text-sm mt-1">{{ form.errors.ISBN }}</p>
         </div>
 
         <div>

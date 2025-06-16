@@ -17,7 +17,7 @@ Route::get('dashboard', function () {
 Route::get('/books', [BookController::class, 'index'])->name('books.index'); //Books page
 Route::get('/books/create', [BookController::class, 'create'])->name('books.create'); //Web form to create a new book
 Route::post('/books', [BookController::class, 'store'])->name('books.store'); //Creates the new book
-Route::get('/books/{book}/edit', [BookController::class, 'edit'])->name('books.edit'); //For editing a book
+Route::get('/books/edit', [BookController::class, 'editPage'])->name('books.editPage'); //For editing a book
 Route::put('/books/{book}', [BookController::class, 'update'])->name('books.update'); //Updates the book details
 
 Route::get('/featured-books', [FeaturedBooksController::class, 'index'])->name('featured.books'); //Featured books page

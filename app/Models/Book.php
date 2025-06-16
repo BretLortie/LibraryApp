@@ -21,7 +21,7 @@ class Book extends Model
         'publisher',
         'publicationDate',
         'category',
-        'isbn',
+        'ISBN',
         'pageCount',
         'avgRating',
     ];

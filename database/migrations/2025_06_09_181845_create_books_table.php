@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('publisher')->nullable();
             $table->date('publicationDate')->nullable();
             $table->string('category')->nullable();
-            $table->string('isbn')->unique();
+            $table->string('ISBN')->unique();
             $table->integer('pageCount')->nullable();
             $table->float('avgRating')->default(0);
             $table->timestamps();
