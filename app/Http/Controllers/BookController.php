@@ -87,4 +87,14 @@ class BookController extends Controller
             'books' => $books,
         ]);
     }
+
+    public function destroy($id)
+    {
+        $book = Book::findOrFail($id);
+        $book->delete();
+
+        return response()->json(['message' => 'Book deleted successfully']);
+        // Or if you prefer redirect:
+        // return redirect()->route('books.index')->with('success', 'Book deleted');
+    }
 }

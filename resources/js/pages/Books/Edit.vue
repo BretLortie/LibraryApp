@@ -18,17 +18,15 @@ const props = defineProps<{
   }>;
 }>();
 
-// Filters
-const filters = ref({
-  title: '',
-  author: '',
-});
+// Single filter input
+const filter = ref('');
 
-// Filtered books based on filters
+// Filtered books based on single filter (search title or author)
 const filteredBooks = computed(() =>
   props.books.filter(book =>
-    book.title.toLowerCase().includes(filters.value.title.toLowerCase()) &&
-    book.author.toLowerCase().includes(filters.value.author.toLowerCase())
+    (book.title + ' ' + book.author)
+      .toLowerCase()
+      .includes(filter.value.toLowerCase())
   )
 );
 
@@ -92,24 +90,20 @@ function deleteBook() {
   <Head title="Edit Books" />
   <AppLayout>
     <div
-      class="w-full min-h-screen p-6 bg-white dark:bg-gray-900 rounded-2xl shadow-md"
+      class="w-full min-h-screen p-6 bg-white dark:bg-black rounded-2xl shadow-md"
       style="box-sizing: border-box;"
     >
-      <h1 class="text-3xl font-bold mb-6 text-center">Edit Books</h1>
 
-      <!-- Filters -->
-      <div class="mb-6 flex flex-wrap gap-4 justify-center">
+        <h1 class="text-2xl font-bold mb-4 sm:mb-0">Edit Books</h1>
+        <br>
+        
+        <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:gap-6">
+        
         <input
-          v-model="filters.title"
+          v-model="filter"
           type="text"
-          placeholder="Filter by title"
-          class="p-2 border rounded w-60"
-        />
-        <input
-          v-model="filters.author"
-          type="text"
-          placeholder="Filter by author"
-          class="p-2 border rounded w-60"
+          placeholder="Search by title or author"
+          class="p-2 border border-gray-400 rounded bg-gray-100 dark:bg-gray-700 dark:border-gray-600 flex-grow max-w-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </div>
 
@@ -127,7 +121,7 @@ function deleteBook() {
                 <input
                   v-model="forms[book.id].title"
                   type="text"
-                  class="w-full p-2 border rounded"
+                  class="w-full p-2 border border-gray-400 rounded bg-gray-100 dark:bg-gray-700 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
               <div>
@@ -135,7 +129,7 @@ function deleteBook() {
                 <input
                   v-model="forms[book.id].author"
                   type="text"
-                  class="w-full p-2 border rounded"
+                  class="w-full p-2 border border-gray-400 rounded bg-gray-100 dark:bg-gray-700 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
 
@@ -144,7 +138,7 @@ function deleteBook() {
                 <input
                   v-model="forms[book.id].publisher"
                   type="text"
-                  class="w-full p-2 border rounded"
+                  class="w-full p-2 border border-gray-400 rounded bg-gray-100 dark:bg-gray-700 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
               <div>
@@ -152,7 +146,7 @@ function deleteBook() {
                 <input
                   v-model="forms[book.id].publicationDate"
                   type="date"
-                  class="w-full p-2 border rounded"
+                  class="w-full p-2 border border-gray-400 rounded bg-gray-100 dark:bg-gray-700 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
 
@@ -161,7 +155,7 @@ function deleteBook() {
                 <input
                   v-model="forms[book.id].category"
                   type="text"
-                  class="w-full p-2 border rounded"
+                  class="w-full p-2 border border-gray-400 rounded bg-gray-100 dark:bg-gray-700 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
               <div>
@@ -169,7 +163,7 @@ function deleteBook() {
                 <input
                   v-model="forms[book.id].ISBN"
                   type="text"
-                  class="w-full p-2 border rounded"
+                  class="w-full p-2 border border-gray-400 rounded bg-gray-100 dark:bg-gray-700 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
 
@@ -178,7 +172,7 @@ function deleteBook() {
                 <input
                   v-model="forms[book.id].pageCount"
                   type="number"
-                  class="w-full p-2 border rounded"
+                  class="w-full p-2 border border-gray-400 rounded bg-gray-100 dark:bg-gray-700 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
 
