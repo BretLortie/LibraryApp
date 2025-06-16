@@ -15,7 +15,7 @@ const mainNavItems: NavItem[] = [
         icon: LayoutGrid,
     },
     {
-        title: 'All Books',
+        title: 'AllBooks',
         href: '/books',
         icon: BookOpen,
     },
@@ -30,12 +30,17 @@ const mainNavItems: NavItem[] = [
 
 const footerNavItems: NavItem[] = [
     {
-        title: 'Github Repo',
+        title: 'This Projects Repo',
+        href: 'https://github.com/BretLortie/LibraryApp',
+        icon: Folder,
+    },
+    {
+        title: 'Laravel Github Repo',
         href: 'https://github.com/laravel/vue-starter-kit',
         icon: Folder,
     },
     {
-        title: 'Documentation',
+        title: 'Laravel Documentation',
         href: 'https://laravel.com/docs/starter-kits#vue',
         icon: BookOpen,
     },
