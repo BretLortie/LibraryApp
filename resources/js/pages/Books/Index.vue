@@ -9,10 +9,7 @@ const breadcrumbs = [
 
 interface Review {
     id: number;
-    user: {
-        name: string;
-        email?: string;
-    };
+    user: string;
     rating: number;
     description: string;
 }
@@ -38,6 +35,9 @@ const expandedBookId = ref<number | null>(null);
 const searchTerm = ref('');
 
 const filteredBooks = computed(() => {
+    if (!searchTerm.value.trim()) {
+        return books;
+    }
     return books.filter(book =>
         book.title.toLowerCase().includes(searchTerm.value.toLowerCase())
     );
@@ -52,12 +52,13 @@ const filteredBooks = computed(() => {
             <h1 class="text-2xl font-bold mb-4">Book Database</h1>
             <h2>Click a book for more details</h2>
             <br>
-
+            
+            <!-- search bar -->
             <input
                 v-model="searchTerm"
                 type="text"
-                placeholder="Search by title..."
-                class="mb-6 p-2 border border-border rounded w-full"
+                placeholder="Search books by title..."
+                class="mb-4 w-full p-2 border rounded"
             />
 
             <ul class="space-y-2">
@@ -77,17 +78,11 @@ const filteredBooks = computed(() => {
 
                         <div v-if="book.reviews && book.reviews.length">
                             <strong>Customer Reviews:</strong>
-                            <ul class="mt-2 space-y-3">
+                            <ul class="mt-2 space-y-1">
                                 <li v-for="review in book.reviews" :key="review.id"
-                                    class="border border-border bg-white dark:bg-gray-800 rounded-xl p-3 shadow-sm">
-                                    <p class="text-sm text-gray-800 dark:text-gray-100">
-                                        <strong>{{ review.user.name }}</strong>
-                                        ({{ review.user.email ?? 'no email' }})
-                                        rated it <strong>{{ review.rating }}/5</strong>
-                                    </p>
-                                    <p class="text-gray-700 dark:text-gray-300 mt-2 italic">
-                                        "{{ review.description }}"
-                                    </p>
+                                    class="border-l-4 pl-2 border-blue-500">
+                                    <p><strong>{{ review.user }}</strong> rated {{ review.rating }}/5</p>
+                                    <p>{{ review.description }}</p>
                                 </li>
                             </ul>
                         </div>
