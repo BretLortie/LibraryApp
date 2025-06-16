@@ -2,6 +2,12 @@
 import { ref } from 'vue';
 import { router } from '@inertiajs/vue3';
 import AppLayout from '@/layouts/app/AppSidebarLayout.vue';
+import { Head } from '@inertiajs/vue3';
+
+
+const breadcrumbs = [ //For the little header at the top of the page
+    { title: 'Featured Books', href: '' },
+];
 
 const props = defineProps<{
     books: {
@@ -33,9 +39,10 @@ const applyFilters = () => {
 </script>
 
 <template>
-    <AppLayout>
+    <Head title="This one too" />
+    <AppLayout :breadcrumbs="breadcrumbs">
         <div class="p-6 space-y-4 bg-gray-100 dark:bg-black min-h-screen">
-            <h1 class="text-2xl font-bold">Featured Books</h1>
+            <h1 class="text-2xl font-bold">Todays Selection</h1>
 
             <!-- Filter + Sort Controls -->
             <div class="flex flex-wrap gap-4 items-end">

@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import AppLayout from '@/layouts/app/AppSidebarLayout.vue';
+import { Head } from '@inertiajs/vue3';
+
 
 const breadcrumbs = [
-    { title: 'Dashboard', href: '/dashboard' },
-    { title: 'Books', href: '' },
+    { title: 'All Books', href: '' },
 ];
 
 interface Review {
@@ -35,9 +36,13 @@ const expandedBookId = ref<number | null>(null);
 </script>
 
 <template>
+    <Head title="Yea I even changed this" />
+
     <AppLayout :breadcrumbs="breadcrumbs">
         <div class="p-6">
-            <h1 class="text-2xl font-bold mb-4">Books</h1>
+            <h1 class="text-2xl font-bold mb-4">Book Database</h1>
+            <h2>Click a book for more details</h2>
+            <br>
             <ul class="space-y-2">
                 <li v-for="book in books" :key="book.id"
                     class="p-4 bg-muted rounded-2xl shadow-sm border border-border mb-4 cursor-pointer"
