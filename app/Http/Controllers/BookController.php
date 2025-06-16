@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class BookController extends Controller
 {
+    // List all books
     public function index()
     {
         $books = Book::with('reviews.user')->get();
@@ -33,5 +35,30 @@ class BookController extends Controller
                 ];
             }),
         ]);
+    }
+
+    // Show form to create a new book
+    public function create()
+    {
+        return Inertia::render('Books/Create');
+    }
+
+    // Handle form submission to store new book
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'author' => 'required|string|max:255',
+            'publisher' => 'nullable|string|max:255',
+            'publicationDate' => 'nullable|date',
+            'category' => 'nullable|string|max:255',
+            'isbn' => 'nullable|string|max:50',
+            'pageCount' => 'nullable|integer|min:1',
+        ]);
+
+        Book::create($validated);
+
+        return redirect()->route('books.index')
+            ->with('success', 'Book added successfully.');
     }
 }
