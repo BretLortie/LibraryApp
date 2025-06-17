@@ -101,27 +101,34 @@ class BookController extends Controller
         return response()->json(['message' => 'Book deleted successfully']);
     }
 
-    public function availableBooks()
+    public function availableBooks(Request $request)
     {
-        $availableBooks = Book::join('library', 'books.id', '=', 'library.book_id')
+        $search = $request->input('search');
+
+        $query = Book::query()
+            ->join('library', 'books.id', '=', 'library.book_id')
             ->where('library.availability', 1)
-            ->select('books.id', 'books.title', 'books.author', 'books.description')
-            ->get();
+            ->select('books.id', 'books.title', 'books.author', 'books.description');
 
-        return $availableBooks;
-    }
+        if ($search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('books.title', 'like', "%{$search}%")
+                    ->orWhere('books.author', 'like', "%{$search}%");
+            });
+        }
 
-
-
-    public function checkoutPage()
-    {
-        $availableBooks = $this->availableBooks();
+        $availableBooks = $query->get();
 
         return Inertia::render('Books/Checkout', [
             'books' => $availableBooks,
+            'filters' => ['search' => $search],
         ]);
     }
 
+    public function checkoutPage(Request $request)
+    {
+        return $this->availableBooks($request);
+    }
 
     public function checkout(Request $request)
     {
