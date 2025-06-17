@@ -42,5 +42,8 @@ class DatabaseSeeder extends Seeder
         }
 
         Library::factory(25)->create(); // creates 20 fake library entries
+
+        $this->call(RoleSeeder::class);
+
     }
 }
