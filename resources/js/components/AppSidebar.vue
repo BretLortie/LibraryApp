@@ -5,7 +5,7 @@ import NavUser from '@/components/NavUser.vue';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { Book, Bookmark, BookOpen, Folder, LayoutGrid, PlusCircle, RotateCcw, ShoppingCart } from 'lucide-vue-next';
+import { Book, Bookmark, BookOpen, Folder, LayoutGrid, Pencil, PlusCircle, RotateCcw, ShoppingCart } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 
 const mainNavItems: NavItem[] = [
@@ -42,8 +42,14 @@ const mainNavItems: NavItem[] = [
     {
         title: 'Return Books',
         href: '/books/return',
-        icon: RotateCcw, 
+        icon: RotateCcw,
+    },
+    {
+        title: 'Review Books',
+        href: '/books/review',
+        icon: Pencil,
     }
+
 
 
 ];

@@ -25,7 +25,9 @@ Route::get('/books/checkout', [BookController::class, 'checkoutPage'])->name('bo
 Route::post('/books/checkout', [BookController::class, 'checkout'])->name('books.checkout.store');
 Route::get('/books/return', [BookController::class, 'returnPage'])->name('books.return.page');
 Route::post('/books/return', [BookController::class, 'returnBook'])->name('books.return');
-
+Route::get('/books/review', [BookController::class, 'reviewLanding'])->name('books.review.landing');
+Route::get('/books/{book}/review', [BookController::class, 'reviewForm'])->name('books.review.form'); // form page
+Route::post('/books/{book}/review', [BookController::class, 'submitReview'])->name('books.review.submit');
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
