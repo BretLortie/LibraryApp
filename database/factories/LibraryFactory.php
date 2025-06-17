@@ -16,7 +16,7 @@ class LibraryFactory extends Factory
     {
         return [
             'book_id' => Book::factory(),
-            'availability' => $this->faker->boolean(),
+            'availability' => 1,
         ];
     }
 }

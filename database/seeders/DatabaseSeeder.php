@@ -30,6 +30,17 @@ class DatabaseSeeder extends Seeder
 
         Transaction::factory(300)->create(); // creates 30 fake transactions
 
+        // Then, for each book, create a return transaction as the latest one
+        $books = Book::all();
+
+        foreach ($books as $book) {
+            Transaction::factory()->create([
+                'book_id' => $book->id,
+                'actionType' => 'return',
+                'timestamp' => now(),  // or any recent timestamp
+            ]);
+        }
+
         Library::factory(25)->create(); // creates 20 fake library entries
     }
 }

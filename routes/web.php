@@ -23,6 +23,8 @@ Route::delete('/books/{book}', [BookController::class, 'destroy'])->name('books.
 Route::get('/featured-books', [FeaturedBooksController::class, 'index'])->name('featured.books'); //Featured books page
 Route::get('/books/checkout', [BookController::class, 'checkoutPage'])->name('books.checkout');
 Route::post('/books/checkout', [BookController::class, 'checkout'])->name('books.checkout.store');
+Route::get('/books/return', [BookController::class, 'returnPage'])->name('books.return.page');
+Route::post('/books/return', [BookController::class, 'returnBook'])->name('books.return');
 
 
 require __DIR__.'/settings.php';

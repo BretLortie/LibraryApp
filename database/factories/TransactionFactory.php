@@ -19,7 +19,7 @@ class TransactionFactory extends Factory
             'user_id' => User::factory(),
             'book_id' => Book::factory(),
             'actionType' => $this->faker->randomElement(['checkout', 'return', 'reserve']),
-            'timestamp' => $this->faker->dateTimeBetween('-1 year', 'now'),
+            'timestamp' => $this->faker->dateTimeBetween('-2 year', '-1 day'),
         ];
     }
 }
