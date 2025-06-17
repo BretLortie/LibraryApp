@@ -19,10 +19,11 @@ Route::get('/books/create', [BookController::class, 'create'])->name('books.crea
 Route::post('/books', [BookController::class, 'store'])->name('books.store'); //Creates the new book
 Route::get('/books/edit', [BookController::class, 'editPage'])->name('books.editPage'); //For editing a book
 Route::put('/books/{book}', [BookController::class, 'update'])->name('books.update'); //Updates the book details
-Route::delete('/books/{book}', [BookController::class, 'destroy'])->name('books.destroy');
-
-
+Route::delete('/books/{book}', [BookController::class, 'destroy'])->name('books.destroy'); 
 Route::get('/featured-books', [FeaturedBooksController::class, 'index'])->name('featured.books'); //Featured books page
+Route::get('/books/checkout', [BookController::class, 'checkoutPage'])->name('books.checkout');
+Route::post('/books/checkout', [BookController::class, 'checkout'])->name('books.checkout.store');
+
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';

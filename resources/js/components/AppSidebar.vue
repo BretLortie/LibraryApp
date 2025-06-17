@@ -5,7 +5,7 @@ import NavUser from '@/components/NavUser.vue';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/vue3';
-import { BookOpen, Folder, LayoutGrid, PlusCircle } from 'lucide-vue-next';
+import { Book, Bookmark, BookOpen, Folder, LayoutGrid, PlusCircle, ShoppingCart } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 
 const mainNavItems: NavItem[] = [
@@ -17,12 +17,12 @@ const mainNavItems: NavItem[] = [
     {
         title: 'All Books',
         href: '/books',
-        icon: BookOpen,
+        icon: Book,
     },
     {
         title: 'Featured Books',
         href: '/featured-books',
-        icon: BookOpen,
+        icon: Bookmark,
     },
     {
         title: 'Add Book',
@@ -30,9 +30,14 @@ const mainNavItems: NavItem[] = [
         icon: PlusCircle,
     },
     {
-        title: 'Edit Books', // temporary link
-        href: '/books/edit',     // change 1 to any valid book ID in your DB
+        title: 'Edit Books',
+        href: '/books/edit', 
         icon: BookOpen,
+    },
+    {
+        title: 'Book Checkout',
+        href: '/books/checkout', 
+        icon: ShoppingCart,
     },
 
 ];
