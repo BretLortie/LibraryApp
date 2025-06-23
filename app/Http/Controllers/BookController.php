@@ -103,7 +103,8 @@ class BookController extends Controller
         $book = Book::findOrFail($id);
         $book->delete();
 
-        return response()->json(['message' => 'Book deleted successfully']);
+        return redirect()->route('books.editPage')
+            ->with('success', 'Book removed successfully.');
     }
 
     public function availableBooks(Request $request)
