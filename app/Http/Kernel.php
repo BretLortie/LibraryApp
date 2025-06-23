@@ -3,13 +3,15 @@
 namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
-use App\Http\Middleware\ConvertEmptyStringsToNull;
+use Illuminate\Contracts\Http\Kernel as KernelContract;
+use Illuminate\Contracts\Container\Container;
+use Illuminate\Contracts\Foundation\Application; // make sure this is at the top
+use Spatie\Permission\Middleware\RoleMiddleware;
+use Spatie\Permission\Middleware\PermissionMiddleware;
+use Spatie\Permission\Middleware\RoleOrPermissionMiddleware;
 
 class Kernel extends HttpKernel
 {
-    /**
-     * Global HTTP middleware stack.
-     */
     protected $middleware = [
         \Illuminate\Http\Middleware\TrustHosts::class,
         \App\Http\Middleware\TrustProxies::class,
@@ -19,9 +21,6 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrimStrings::class,
     ];
 
-    /**
-     * Route middleware groups.
-     */
     protected $middlewareGroups = [
         'web' => [
             \App\Http\Middleware\HandleAppearance::class,
@@ -40,15 +39,11 @@ class Kernel extends HttpKernel
         ],
     ];
 
-    /**
-     * Route middleware (assignable to specific routes).
-     */
     protected $routeMiddleware = [
         'auth' => \App\Http\Middleware\Authenticate::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
 
-        // Laravel built-ins
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
