@@ -4,15 +4,21 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class AppServiceProvider extends ServiceProvider
+class AuthServiceProvider extends ServiceProvider
 {
+    /**
+     * Register services.
+     */
     public function register(): void
     {
         //
     }
 
+    /**
+     * Bootstrap services.
+     */
     public function boot(): void
     {
-        // Remove any Inertia::share calls here. Leave empty or with other logic if needed.
+        //
     }
 }
