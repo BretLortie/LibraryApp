@@ -2,58 +2,106 @@
 import NavFooter from '@/components/NavFooter.vue';
 import NavMain from '@/components/NavMain.vue';
 import NavUser from '@/components/NavUser.vue';
-import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
+import {
+    Sidebar,
+    SidebarContent,
+    SidebarFooter,
+    SidebarHeader,
+    SidebarMenu,
+    SidebarMenuButton,
+    SidebarMenuItem,
+} from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
-import { Link } from '@inertiajs/vue3';
-import { Book, Bookmark, BookOpen, Folder, LayoutGrid, Pencil, PlusCircle, RotateCcw, ShoppingCart } from 'lucide-vue-next';
+import { Link, usePage } from '@inertiajs/vue3';
+import { computed } from 'vue';
+import {
+    Book,
+    Bookmark,
+    BookOpen,
+    Folder,
+    LayoutGrid,
+    Pencil,
+    PlusCircle,
+    RotateCcw,
+    ShoppingCart,
+} from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 
-const mainNavItems: NavItem[] = [
-    {
-        title: 'Dashboard',
-        href: '/dashboard',
-        icon: LayoutGrid,
-    },
-    {
-        title: 'All Books',
-        href: '/books',
-        icon: Book,
-    },
-    {
-        title: 'Featured Books',
-        href: '/featured-books',
-        icon: Bookmark,
-    },
-    {
-        title: 'Add Book',
-        href: '/books/create',
-        icon: PlusCircle,
-    },
-    {
-        title: 'Edit Books',
-        href: '/books/edit',
-        icon: BookOpen,
-    },
-    {
-        title: 'Book Checkout',
-        href: '/books/checkout',
-        icon: ShoppingCart,
-    },
-    {
-        title: 'Return Books',
-        href: '/books/return',
-        icon: RotateCcw,
-    },
-    {
-        title: 'Review Books',
-        href: '/books/review',
-        icon: Pencil,
+interface PageProps {
+    auth: {
+        user: {
+            id: number
+            name: string
+            email: string
+            avatar: string | null
+            role: string
+        } | null
+    }
+    [key: string]: unknown; // Add index signature to satisfy Inertia's PageProps constraint
+}
+
+const user = (usePage<PageProps>().props.auth.user);
+const role = user?.role?.toLowerCase();
+console.log('ROLE:', role);
+
+const mainNavItems = computed(() => {
+    const items: NavItem[] = [
+        {
+            title: 'Dashboard',
+            href: '/dashboard',
+            icon: LayoutGrid,
+        },
+        {
+            title: 'All Books',
+            href: '/books',
+            icon: Book,
+        },
+        {
+            title: 'Featured Books',
+            href: '/featured-books',
+            icon: Bookmark,
+        },
+    ];
+
+    if (role === 'librarian' || role === 'admin') {
+        items.push(
+            {
+                title: 'Add Book',
+                href: '/books/create',
+                icon: PlusCircle,
+            },
+            {
+                title: 'Edit Books',
+                href: '/books/edit',
+                icon: BookOpen,
+            },
+            {
+                title: 'Return Books',
+                href: '/books/return',
+                icon: RotateCcw,
+            }
+        );
     }
 
+    if (role === 'customer' || role === 'admin') {
+        items.push(
+            {
+                title: 'Book Checkout',
+                href: '/books/checkout',
+                icon: ShoppingCart,
+            },
 
+            {
+                title: 'Review Books',
+                href: '/books/review',
+                icon: Pencil,
+            },
+        );
 
-];
+    }
 
+    return items;
+});
 
 const footerNavItems: NavItem[] = [
     {
