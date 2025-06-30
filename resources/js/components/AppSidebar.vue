@@ -53,12 +53,12 @@ const mainNavItems = computed(() => {
         },
         {
             title: 'All Books',
-            href: '/books',
+            href: '/All_Books/Index',
             icon: Book,
         },
         {
             title: 'Featured Books',
-            href: '/featured-books',
+            href: '/Featured_Books/Featured',
             icon: Bookmark,
         },
     ];
@@ -67,17 +67,17 @@ const mainNavItems = computed(() => {
         items.push(
             {
                 title: 'Add Book',
-                href: '/books/create',
+                href: '/Add_Book/create',
                 icon: PlusCircle,
             },
             {
                 title: 'Edit Books',
-                href: '/books/edit',
+                href: '/Edit_Books/edit',
                 icon: BookOpen,
             },
             {
                 title: 'Return Books',
-                href: '/books/return',
+                href: '/Return_Books/return',
                 icon: RotateCcw,
             }
         );
@@ -87,13 +87,13 @@ const mainNavItems = computed(() => {
         items.push(
             {
                 title: 'Book Checkout',
-                href: '/books/checkout',
+                href: '/Book_Checkout/checkout',
                 icon: ShoppingCart,
             },
 
             {
                 title: 'Review Books',
-                href: '/books/review',
+                href: '/Review_Books/ReviewLanding',
                 icon: Pencil,
             },
         );

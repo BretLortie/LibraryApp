@@ -23,7 +23,7 @@ class BookController extends Controller
     {
         $books = Book::with('reviews.user')->get();
 
-        return Inertia::render('Books/Index', [
+        return Inertia::render('All_Books/Index', [
             'books' => $books->map(function ($book) {
                 return [
                     'id' => $book->id,
@@ -50,7 +50,7 @@ class BookController extends Controller
     // Show form to create a new book
     public function create()
     {
-        return Inertia::render('Books/Create');
+        return Inertia::render('Add_Book/Create');
     }
 
     // Handle form submission to store new book
@@ -68,7 +68,7 @@ class BookController extends Controller
 
         Book::create($validated);
 
-        return redirect()->route('books.index')
+        return redirect()->route('Add_Book.index')
             ->with('success', 'Book added successfully.');
     }
 
@@ -86,14 +86,14 @@ class BookController extends Controller
 
         $book->update($validated);
 
-        return redirect()->route('books.index')->with('success', 'Book updated successfully.');
+        return redirect()->route('All_Books.index')->with('success', 'Book updated successfully.');
     }
 
     public function editPage()
     {
         $books = Book::all();
 
-        return Inertia::render('Books/Edit', [
+        return Inertia::render('Edit_Books/Edit', [
             'books' => $books,
         ]);
     }
@@ -103,7 +103,7 @@ class BookController extends Controller
         $book = Book::findOrFail($id);
         $book->delete();
 
-        return redirect()->route('books.editPage')
+        return redirect()->route('Edit_Books.editPage') //Come back to this
             ->with('success', 'Book removed successfully.');
     }
 
@@ -125,7 +125,7 @@ class BookController extends Controller
 
         $availableBooks = $query->get();
 
-        return Inertia::render('Books/Checkout', [
+        return Inertia::render('Book_Checkout/Checkout', [
             'books' => $availableBooks,
             'filters' => ['search' => $search],
         ]);
@@ -186,12 +186,10 @@ class BookController extends Controller
             ->orderBy('transactions.timestamp', 'desc')
             ->get();
 
-        return Inertia::render('Books/Return', [
+        return Inertia::render('Return_Books/Return', [
             'books' => $books,
         ]);
     }
-
-
     public function returnBook(Request $request)
     {
         $validated = $request->validate([
@@ -210,13 +208,13 @@ class BookController extends Controller
             'timestamp' => now(),
         ]);
 
-        return redirect()->route('books.return')->with('success', 'Book returned successfully.');
+        return redirect()->route('Return_Books.return')->with('success', 'Book returned successfully.');
     }
 
     // Show the review form for a specific book
     public function reviewForm(Book $book)
     {
-        return Inertia::render('Books/ReviewForm', [
+        return Inertia::render('Review_Books/ReviewForm', [
             'book' => $book,
             'errors' => session('errors') ? session('errors')->getBag('default')->getMessages() : new \stdClass(),
             'flash' => [
@@ -241,9 +239,10 @@ class BookController extends Controller
         ]);
 
 
-        return redirect()->route('books.review.landing')->with('success', 'Review submitted successfully.');
+        return redirect()->route('Review_Books.ReviewLanding')->with('success', 'Review submitted successfully.');
     }
 
+    // Landing page for book reviews
     public function reviewLanding(Request $request)
     {
         $search = $request->input('search', '');
@@ -255,7 +254,7 @@ class BookController extends Controller
             })
             ->get(['id', 'title', 'author', 'description']);
 
-        return Inertia::render('Books/ReviewLanding', [
+        return Inertia::render('Review_Books/ReviewLanding', [
             'books' => $books,
             'filters' => ['search' => $search],
         ]);
