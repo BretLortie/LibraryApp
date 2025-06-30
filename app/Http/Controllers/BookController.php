@@ -68,10 +68,11 @@ class BookController extends Controller
 
         Book::create($validated);
 
-        return redirect()->route('Add_Book.index')
+        return redirect()->route('books.index') // Redirect to the page with all the books on it
             ->with('success', 'Book added successfully.');
     }
 
+    //Edits the book information
     public function update(Request $request, Book $book)
     {
         $validated = $request->validate([
@@ -86,9 +87,10 @@ class BookController extends Controller
 
         $book->update($validated);
 
-        return redirect()->route('All_Books.index')->with('success', 'Book updated successfully.');
+        return redirect()->route('books.edit')->with('success', 'Book updated successfully.');
     }
 
+    //Displays the edit page with all books
     public function editPage()
     {
         $books = Book::all();
@@ -103,7 +105,7 @@ class BookController extends Controller
         $book = Book::findOrFail($id);
         $book->delete();
 
-        return redirect()->route('Edit_Books.editPage') //Come back to this
+        return redirect()->route('books.edit') //Come back to this
             ->with('success', 'Book removed successfully.');
     }
 
@@ -208,7 +210,7 @@ class BookController extends Controller
             'timestamp' => now(),
         ]);
 
-        return redirect()->route('Return_Books.return')->with('success', 'Book returned successfully.');
+        return redirect()->route('books.return')->with('success', 'Book returned successfully.');
     }
 
     // Show the review form for a specific book
@@ -239,7 +241,7 @@ class BookController extends Controller
         ]);
 
 
-        return redirect()->route('Review_Books.ReviewLanding')->with('success', 'Review submitted successfully.');
+        return redirect()->route('books.review.landing')->with('success', 'Review submitted successfully.');
     }
 
     // Landing page for book reviews

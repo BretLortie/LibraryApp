@@ -53,7 +53,7 @@ Route::middleware(['auth'])->group(function () {
     Route::middleware(['auth', 'role:admin|librarian'])->group(function () {
         Route::get('/Add_Book/create', [BookController::class, 'create'])->name('books.create');
         Route::post('', [BookController::class, 'store'])->name('books.store');
-        Route::get('/Edit_Books/edit', [BookController::class, 'editPage'])->name('books.editPage');
+        Route::get('/Edit_Books/edit', [BookController::class, 'editPage'])->name('books.edit');
         Route::put('/Edit_Books/{book}', [BookController::class, 'update'])->name('books.update');
         Route::delete('/Edit_Books/{book}', [BookController::class, 'destroy'])->name('books.destroy');
         Route::get('/Return_Books/return', [BookController::class, 'returnPage'])->name('books.return.page');
