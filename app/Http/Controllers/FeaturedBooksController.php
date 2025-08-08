@@ -37,7 +37,7 @@ class FeaturedBooksController extends Controller
 
         $books = $query->get();
 
-        return inertia('Books/Featured', [
+        return inertia('Featured_Books/Featured', [
             'books' => $books->map(function ($entry) {
                 return [
                     'availability' => $entry->availability,
