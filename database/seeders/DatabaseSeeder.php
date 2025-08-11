@@ -21,7 +21,8 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([ // creates a specific user
             'name' => 'Test User',
-            'email' => 'test@example.com',
+            'email' => 'test@gmail.com',
+            'password' => bcrypt('password'), // Set a known password
         ]);
 
         Book::factory(30)->create(); // creates 20 fake books
